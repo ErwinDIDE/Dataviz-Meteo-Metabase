@@ -1,0 +1,13 @@
+# Fichiers de données  
+data/*.csv
+data/*.json
+
+# Environnement virtuel Python et caches
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Données locales (Postgres et Metabase)
+.metabase-data/
+postgres_data/
