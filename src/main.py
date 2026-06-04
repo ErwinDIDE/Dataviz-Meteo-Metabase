@@ -7,7 +7,7 @@ engine = create_engine(DATABASE_URL)
 
 def nettoyage_et_chargement():
     
-    file_path = "../data/raw/Q_01_avant-1949_RR-T-Vent.csv"
+    file_path = "./data/raw/Q_01_avant-1949_RR-T-Vent.csv"
     print(f"📥 Lecture directe du fichier CSV : {file_path}")
     
     # Lecture du fichier
@@ -34,6 +34,11 @@ def nettoyage_et_chargement():
         'QRR': 'qualite_donnee_rr'
     }
     df = df.rename(columns={k: v for k, v in rename_dict.items() if k in df.columns})
+
+    # Sauvegarde dans /processed
+    file_path = "./data/processed/meteo_1949.csv"
+    df.to_csv(file_path, index=False)
+    print(f"💾 Fichier nettoyé sauvegardé : {file_path}")
     
     # Injection dans PostgreSQL
     table_name = "meteo_1949"
