@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # PostgreSQL
+  # 1. Base de données PostgreSQL
   postgres_db:
     image: postgres:15-alpine
     container_name: dataviz_postgres
@@ -14,13 +14,15 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # Pipeline Python 
+  # 2. Pipeline Python 
   data_pipeline:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: dataviz_pipeline
     network_mode: "host" 
+    volumes:
+      - ./data:/app/data 
     depends_on:
       - postgres_db
 
